@@ -7,4 +7,4 @@ views = Blueprint("views", __name__)
 
 @views.route('/')
 def index():
-    return "<h2> Welcome </h2>"
+    return render_template('index.html')
