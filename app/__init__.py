@@ -2,9 +2,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from .utils.db import db
 from .routes.views import views
-
-
-
 import uuid
 
 
@@ -32,3 +29,5 @@ app = init_app()
 
 with app.app_context():
       db.create_all()
+
+port = 7500
