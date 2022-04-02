@@ -5,11 +5,12 @@
 <h3>Welcome to this Sign Up View</h3>
 
 <form action="/signup" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     <label for="username">Trainer</label>
-    <input type="text" name="username">
+    <input type="text" name="username"  required>
 
-    <label for="email">Trainer</label>
-    <input type="text" name="email">
+    <label for="password">Password</label>
+    <input type="text" name="password"  required>
 
 
     <button type="submit" name="send">SignUp</button>

@@ -2,12 +2,14 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from .models.models import Trainer
 from flask_login import LoginManager
+from flask_wtf.csrf import CSRFProtect
 from .utils.db import db
 from .routes import views, api, auth
 from os import path
 import uuid
 
 login_manager = LoginManager()
+csrf = CSRFProtect()
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -21,6 +23,9 @@ def init_app() -> Flask:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/pokedex.sql'
     app.config['DEBUG'] = True
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    #Csrf Protection
+    csrf.init_app(app)
+
 
     #login manager use
 

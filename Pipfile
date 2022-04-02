@@ -9,6 +9,8 @@ flask-sqlalchemy = "*"
 sqlalchemy = "*"
 requests = "*"
 flask-login = "*"
+flask-csrf = "*"
+flask-wtf = "*"
 
 [dev-packages]
 

@@ -29,7 +29,11 @@ def get_pokemon_type(pokemons) -> list:
 
 
 @views.route('/',methods=['GET'])
-def  index():
+def home():
+    return render_template('index.html')
+
+@views.route('/fill_database',methods=['GET'])
+def  fill_database():
     r = requests.get('https://pokeapi.co/api/v2/pokemon?limit=151&offset=0')
     
     print(r.status_code)
