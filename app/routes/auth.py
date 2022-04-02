@@ -10,3 +10,8 @@ auth_bp = Blueprint("auth_bp", __name__)
 @auth_bp.route('/auth')
 def login():
     return 'Welcome to the login view'
+
+
+@auth_bp.route('/signup')
+def signup():
+    return render_template('signup.html')

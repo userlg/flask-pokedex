@@ -1,10 +1,18 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from .models.models import Trainer
+from flask_login import LoginManager
 from .utils.db import db
 from .routes import views, api, auth
 from os import path
 import uuid
 
+login_manager = LoginManager()
+
+@login_manager.user_loader
+def load_user(user_id):
+    #Trainer.query.get(user_id)
+    return Trainer.query.filter_by(id=user_id).first()
 
 def init_app() -> Flask:
     app = Flask(__name__)
@@ -14,13 +22,16 @@ def init_app() -> Flask:
     app.config['DEBUG'] = True
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+    #login manager use
+
+    login_manager.init_app(app)
+
     #Register of the Blueprints
     app.register_blueprint(api.api_bp)
     app.register_blueprint(views.views)
     app.register_blueprint(auth.auth_bp)
-  
-
     
+    #Sqlalchemy Register App
 
     SQLAlchemy(app)
 
