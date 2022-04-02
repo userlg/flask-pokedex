@@ -1,6 +1,36 @@
 
 from ..utils.db import db
 from datetime import datetime as dt
+from werkzeug.security import check_password_hash, generate_password_hash
+
+
+
+class Trainer(db.Model):
+    __tablename__ = 'trainer'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    username = db.Column(db.String(50), nullable=False, unique=True)
+    password = db.Column(db.String(255), nullable=False)
+    created_ad = db.Column(db.DateTime, nullable=False, default=dt.now())
+    captured = db.relationship('Captured', backref='trainer', lazy=True)
+
+
+    def __init__(self, username, password):
+        self.username = username
+        self.password = generate_password_hash(password)
+
+    def verify_password(self, password) -> bool:
+        if (check_password_hash(self.password,password)):
+            return True
+        return False
+
+
+class Captured(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    pokemon = db.Column(db.String(55), nullable=False)
+    created_ad = db.Column(db.DateTime,default=dt.now())
+    id_trainer = db.Column(db.Integer,db.ForeignKey('trainer.id'), nullable=False)
+
+
 
 
 class Pokemon(db.Model):

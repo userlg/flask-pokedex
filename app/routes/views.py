@@ -39,21 +39,34 @@ def  index():
         i += 1
         name = pokemon['name']
         description = get_pokemon_description(name)
-        print(str(i) + '-->' + name)
+        print(f'{i} --> {name} <--> captured ')
 
         end_point = f'https://pokeapi.co/api/v2/pokemon-form/{i}/'
         t =requests.get(end_point).json()
         
         list_of_type = []
         list_of_type = get_pokemon_type(t)
-        
-        
 
         poke = Pokemon(name, list_of_type[0],list_of_type[1], description)
         db.session.add(poke)
         db.session.commit()
 
         list_of_type.clear()
-    
 
     return render_template('index.html')
+
+
+
+@views.route('/get_pokemon_image',methods=['GET'])
+def get_pokemon_image():
+    pokeid = 0
+    while(pokeid <= 151):
+      r = requests.get(f"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{pokeid}.png").content
+      image_name = f'{pokeid}.png'
+      with open(f'app/static/pokemons/{image_name}','wb') as handler:
+          handler.write(r)
+      pokeid += 1
+      print(f'\t Downloaded-->{pokeid}')
+
+    return 'Welcome about route'
+    

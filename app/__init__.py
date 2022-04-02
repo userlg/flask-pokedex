@@ -1,7 +1,8 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from .utils.db import db
-from .routes.views import views
+from .routes import views, api, auth
+from os import path
 import uuid
 
 
@@ -14,10 +15,10 @@ def init_app() -> Flask:
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     #Register of the Blueprints
-
-    app.register_blueprint(views)
-
-    #Creation of database in sqlite3
+    app.register_blueprint(api.api_bp)
+    app.register_blueprint(views.views)
+    app.register_blueprint(auth.auth_bp)
+  
 
     
 
@@ -27,7 +28,12 @@ def init_app() -> Flask:
 
 app = init_app()
 
-with app.app_context():
+
+if path.exists('app/database/pokedex.sql'):
+    print("Database already exist")
+else:
+  with app.app_context():
+      print('Database no exist <--> begin creation process')
       db.create_all()
 
-port = 7500
+port = 8000
