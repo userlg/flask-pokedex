@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
+from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify, session
 from flask_login import LoginManager, login_user, logout_user, login_required
 from ..models.models import Trainer
 from ..utils.db import db
@@ -51,9 +51,15 @@ def signup():
     return render_template('signup.html')
 
 
+
+
 @auth_bp.route('/logout',methods=['GET'])
-@login_required
 def logout():
     logout_user()
-    flash('See you later Trainer')
+    #session.pop('username',None)
+    if session.get('was_once_logged_in'):
+        # prevent flashing automatically logged out message
+        del session['was_once_logged_in']
+    flash('You have successfully logged yourself out.')
     return redirect(url_for('views.home'))
+
