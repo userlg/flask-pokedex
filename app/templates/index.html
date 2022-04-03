@@ -4,8 +4,16 @@
 
 <h3>Welcome to this app</h3>
 
-{% for pokemon in pokemons %}
-<p>{{ pokemon }}</p>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+
+<p>{{message}}</p>
 {% endfor %}
+{% endif %}
+{% endwith %}
+
+<a href="{{ url_for('auth_bp.login') }}">Login</a>
+<a href="{{ url_for('auth_bp.signup') }}">Signup</a>
 
 {% endblock %}

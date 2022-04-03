@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% block title %} Sign Up {% endblock %}
+{% block title %} Login {% endblock %}
 {% block content %}
 
-<h3>Welcome to this Sign Up View</h3>
+<h2>Welcome to Login</h2>
 
-<form action="/signup" method="POST">
+<form action="/login" method="POST">
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     {% for message in messages %}
@@ -22,6 +22,8 @@
 
     <button type="submit" name="send">SignUp</button>
 </form>
+
+<a href="{{ url_for('auth_bp.signup') }}">Do you have an account !! <strong>Create one</strong></a>
 
 
 {% endblock %}

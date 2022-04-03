@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %} Protected {% endblock %}
+{% block content %}
+
+<h3>Protected View</h3>
+
+{% if current_user.is_authenticated() %}
+  Hi {{ current_user.username }}! --> Eres Miembro desde -->{{ current_user.created_ad}}
+
+{% endif %}
+
+
+<a href="{{ url_for('auth_bp.logout') }}">Logout</a>
+
+
+{% endblock %}

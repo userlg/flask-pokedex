@@ -2,10 +2,11 @@
 from ..utils.db import db
 from datetime import datetime as dt
 from werkzeug.security import check_password_hash, generate_password_hash
+from flask_login import UserMixin
 
 
 
-class Trainer(db.Model):
+class Trainer(db.Model, UserMixin):
     __tablename__ = 'trainer'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
@@ -22,6 +23,15 @@ class Trainer(db.Model):
         if (check_password_hash(self.password,password)):
             return True
         return False
+
+    def is_authenticated(self):
+        return True
+    def is_active(self):
+        return True
+    def is_anonymous(self):
+        return False
+    def get_id(self):
+        return str(self.id)
 
 
 class Captured(db.Model):

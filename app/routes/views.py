@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
+from flask_login import login_required
 
 from ..models.models import Pokemon
 from ..utils.db import db
@@ -74,3 +75,8 @@ def get_pokemon_image():
 
     return 'Welcome about route'
     
+
+@views.route('/protected',methods=['GET'])
+@login_required
+def protected():
+    return render_template('protected.html')
