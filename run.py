@@ -7,4 +7,4 @@ if __name__ == '__main__':
 
     #------------------MAIN FILE POKEDEX-------------------#
 
-    #---------------->CREATED BY USERLG
+    #---------------->CREATED BY USERLG---------------------#

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
+from flask import Blueprint, render_template, redirect, url_for, flash, jsonify
 from flask_login import login_required
 
 from ..models.models import Pokemon
@@ -8,6 +8,16 @@ import requests
 
 views = Blueprint("views", __name__)
 
+#This function get the pokemo pics
+def get_pokemon_image() -> None:
+    pokeid = 0
+    while(pokeid <= 151):
+      r = requests.get(f"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{pokeid}.png").content
+      image_name = f'{pokeid}.png'
+      with open(f'app/static/pokemons/{image_name}','wb') as handler:
+          handler.write(r)
+      pokeid += 1
+      print(f'\t Downloaded-->{pokeid}')
 
 
 def get_pokemon_description(name : str) -> str:
@@ -57,23 +67,14 @@ def  fill_database():
         db.session.commit()
 
         list_of_type.clear()
-
+    
+    get_pokemon_image()
     return render_template('index.html')
 
 
 
-@views.route('/get_pokemon_image',methods=['GET'])
-def get_pokemon_image():
-    pokeid = 0
-    while(pokeid <= 151):
-      r = requests.get(f"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{pokeid}.png").content
-      image_name = f'{pokeid}.png'
-      with open(f'app/static/pokemons/{image_name}','wb') as handler:
-          handler.write(r)
-      pokeid += 1
-      print(f'\t Downloaded-->{pokeid}')
 
-    return 'Welcome about route'
+
     
 
 @views.route('/protected',methods=['GET'])
