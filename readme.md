@@ -11,3 +11,8 @@
 + Pip
 
 + Pipenv
+
+# Palet
+```
+Yellow #F7C505      Red #D6092E     Blue #3769B0
+```

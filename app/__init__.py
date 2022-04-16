@@ -74,4 +74,4 @@ else:
       print('Database no exist <--> begin creation process')
       db.create_all()
 
-port = 8000
+port = 7000

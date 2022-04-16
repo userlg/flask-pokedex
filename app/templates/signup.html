@@ -2,26 +2,42 @@
 {% block title %} Sign Up {% endblock %}
 {% block content %}
 
-<h3>Welcome to this Sign Up View</h3>
+<h3 class="style">Please Sign Up!!</h3>
 
-<form action="/signup" method="POST">
+
+
     {% with messages = get_flashed_messages() %}
     {% if messages %}
+    <div class="alert alert-info col-8 abs-center container" role="alert">
     {% for message in messages %}
-    <p>{{message}}</p>
+    <p class="text-center">{{message}}</p>
+    </div>
     {% endfor %}
     {% endif %}
     {% endwith %}
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-    <label for="username">Trainer</label>
-    <input type="text" name="username"  required>
-
-    <label for="password">Password</label>
-    <input type="password" name="password"  required>
 
 
-    <button type="submit" name="send">SignUp</button>
+<div class="container">
+<form action="/signup" method="POST" class="col-8 d-block mx-auto mt-4  border border-primary border-1 bg-white rounded p-5 my-4">
+   
+    <input type="hidden" ' name="csrf_token" value="{{ csrf_token() }}"/>
+    <label for="username" class="form-label form-style">Trainer</label>
+
+    <input type="text" name="username" class="form-control my-2" required>
+
+    <label for="password" class="form-label form-style">Password</label>
+
+    <input type="password" name="password" class="form-control my-2 " required>
+
+
+    <button type="submit" name="send" class="btn btn-dark my-4 d-block mx-auto">SignUp</button>
 </form>
+
+<div class="d-flex justify-content-end">
+    <a href="{{ url_for('auth_bp.login') }}" class="no-deco">If you are registered Login <strong class="text-primary">Here!!!</strong></a>
+</div>
+
+</div>
 
 
 {% endblock %}

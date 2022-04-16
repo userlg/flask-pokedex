@@ -11,13 +11,14 @@ class Trainer(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(255), nullable=False)
-    created_ad = db.Column(db.DateTime, nullable=False, default=dt.now())
+    created_ad = db.Column(db.DateTime, nullable=False)
     captured = db.relationship('Captured', backref='trainer', lazy=True)
 
 
-    def __init__(self, username, password):
+    def __init__(self, username, password, created_ad):
         self.username = username
         self.password = generate_password_hash(password)
+        self.created_ad = created_ad
 
     def verify_password(self, password) -> bool:
         if (check_password_hash(self.password,password)):

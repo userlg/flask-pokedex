@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 from flask_login import LoginManager, login_user, logout_user, login_required
 from ..models.models import Trainer
 from ..utils.db import db
+from datetime import datetime as dt
 
 login_manager = LoginManager()
 
@@ -41,7 +42,7 @@ def signup():
             db.session.rollback()
             return redirect('/signup')
         if username and password:
-            trainer = Trainer(username,password)
+            trainer = Trainer(username,password,dt.now())
             db.session.add(trainer)
             db.session.commit()
             flash('User registered sucessfully')

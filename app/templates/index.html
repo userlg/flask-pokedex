@@ -2,18 +2,39 @@
 {% block title %} Home {% endblock %}
 {% block content %}
 
-<h3>Welcome to this app</h3>
+<h3 class="style">Welcome to this Pokedex App</h3>
 
 {% with messages = get_flashed_messages() %}
 {% if messages %}
 {% for message in messages %}
 
-<p>{{message}}</p>
+<div class="alert alert-primary alert-dismissible fade show col-6 d-block mx-auto" role="alert">
+  <strong class="text-center">{{ message }}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 {% endfor %}
 {% endif %}
 {% endwith %}
 
-<a href="{{ url_for('auth_bp.login') }}">Login</a>
-<a href="{{ url_for('auth_bp.signup') }}">Signup</a>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid"> 
+      <a class="navbar-brand" href="{{ url_for('views.home') }}">
+        <h3 class="pokedex">Pokedex</h3>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ url_for('views.home') }}">Home</a>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
 
 {% endblock %}

@@ -2,15 +2,8 @@
 {% block title %} Protected {% endblock %}
 {% block content %}
 
-<h3>Protected View</h3>
+<h3 class="style">Protected View</h3>
 
-{% if current_user.is_authenticated() %}
-  Hi {{ current_user.username }}! --> Eres Miembro desde -->{{ current_user.created_ad}}
-
-{% endif %}
-
-
-<a href="/logout">Logout</a>
 
 
 {% endblock %}

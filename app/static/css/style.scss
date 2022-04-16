@@ -1,8 +1,96 @@
+//---------------Variables
+
+
+//@import url('https://fonts.googleapis.com/css2?family=Ms+Madi&family=Playfair+Display&family=Righteous&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+
+$font-Pf: 'Playfair Display', serif;
+
+$pred: #d6092e;
+
+$pyellow: #f7c505;
+
+$pblue: #3769b0;
+
+$pgreen: #58D68D;
+
+
 html, body {
     padding: 0;
     margin: 0;
 }
 
-body {
-    background-color: rgb(216, 216, 199);
+.poke-body {
+
+    background-color: #F7DC6F;
+}
+
+.user-style {
+    color: $pyellow;
+    //text-shadow: 3px 5px 4px black;
+    -webkit-text-stroke-width: 1.6px;
+   -webkit-text-stroke-color: $pblue;
+    font-size: 1.4vw;
+    font-weight: 700;
+}
+
+.style {
+    text-align: center;
+    font-size: 2.4vw;
+    font-family: sans-serif;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    color: $pyellow;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: $pblue;
+    font-weight: 700;
+}
+
+.pred {
+    background-color: $pred;
+}
+
+.pblue {
+    color: #3769b0;
+}
+
+.pyellow {
+
+    color: #f7c505;
+}
+
+.poke-style {
+    color: $pyellow;
+    text-decoration: none;
+    font-size: 1.4em;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: $pblue;
+    font-weight: bold;
+}
+
+.no-deco{
+    font-size: 1.2vw;
+    text-decoration: none;
+    color: black;
+    }
+
+
+.pokedex {
+    color: $pyellow;
+    -webkit-text-stroke-width: 1.3px;
+    -webkit-text-stroke-color: $pblue;
+    font-size: 2vw;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    display: block;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.form-style {
+    font-family: $font-Pf;
+    font-size: 1.5vw;
 }

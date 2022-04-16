@@ -2,28 +2,38 @@
 {% block title %} Login {% endblock %}
 {% block content %}
 
-<h2>Welcome to Login</h2>
-
-<form action="/login" method="POST">
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    {% for message in messages %}
-    <p>{{message}}</p>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-    <label for="username">Trainer</label>
-    <input type="text" name="username"  required>
-
-    <label for="password">Password</label>
-    <input type="password" name="password"  required>
+<h3 class="style">Welcome to Login</h3>
 
 
-    <button type="submit" name="send">SignUp</button>
-</form>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-primary alert-dismissible col-8 fade show d-block mx-auto" role="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
 
-<a href="{{ url_for('auth_bp.signup') }}">Do you have an account !! <strong>Create one</strong></a>
 
+<div class="container ">
+    <form action="/login" method="POST" class="d-block mx-auto col-8 d-flex flex-column border border-primary border-1 bg-white rounded p-5 my-4">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <label for="username" class="form-label form-style">Trainer</label>
+        <input type="text" name="username" required class="form-control">
+
+        <label for="password" class="form-label form-style">Password</label>
+        <input type="password" name="password" class="form-control" required>
+
+
+        <button type="submit" name="send" class="btn btn-dark my-4 d-block mx-auto">Login</button>
+    </form>
+    <div class="d-flex justify-content-end">
+        <a href="{{ url_for('auth_bp.signup') }}" class="no-deco">Do you have an account !!<strong class="text-primary">Create one</strong></a>
+    </div>
+    
+
+</div>
 
 {% endblock %}

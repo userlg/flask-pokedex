@@ -1,7 +1,8 @@
+from unittest import result
 from flask import Blueprint, render_template, redirect, url_for, flash, jsonify
 from flask_login import login_required
 
-from ..models.models import Pokemon
+from ..models.models import Pokemon, Trainer
 from ..utils.db import db
 
 import requests
@@ -10,7 +11,7 @@ views = Blueprint("views", __name__)
 
 #This function get the pokemo pics
 def get_pokemon_image() -> None:
-    pokeid = 0
+    pokeid = 1
     while(pokeid <= 151):
       r = requests.get(f"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{pokeid}.png").content
       image_name = f'{pokeid}.png'
@@ -41,6 +42,13 @@ def get_pokemon_type(pokemons) -> list:
 
 @views.route('/',methods=['GET'])
 def home():
+    results = Pokemon.query.all();
+    if results:
+      pokemons = []
+      for result in results:
+        print(result.name)
+        pokemons.append(result)
+
     return render_template('index.html')
 
 @views.route('/fill_database',methods=['GET'])
@@ -70,11 +78,6 @@ def  fill_database():
     
     get_pokemon_image()
     return render_template('index.html')
-
-
-
-
-
     
 
 @views.route('/protected',methods=['GET'])
